@@ -1,13 +1,13 @@
 import React, { Component } from '../../../node_modules/react';
 import './index.css';
 
-class App extends Component {
-  render() {
+class SidePanel extends Component {
+    render() {
     return (
-      <div className="app">
+      <div className="sidePanel">
       </div>
     );
   }
 }
 
-export default App;
+export default SidePanel;

@@ -7,10 +7,12 @@ import './index.css';
 
 class SidePanel extends Component {
   getTasks() {
-    return this.props.lists.map(d => <MenuItem value={ d.name }>{ d.name }</MenuItem> );
+    return this.props.lists.map(d => <MenuItem value={ d }>{ d.label }</MenuItem> );
   }
 
   render() {
+    const { lists, currentList, onChange } = this.props;
+
     return (
         <div>
           <Drawer
@@ -20,7 +22,8 @@ class SidePanel extends Component {
           >
             <Select
               children={ this.getTasks() }
-              value={ this.props.lists[0].name }
+              value={ currentList }
+              onChange={ onChange }
             >
             </Select>
           </Drawer>

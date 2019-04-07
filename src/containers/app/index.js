@@ -1,11 +1,16 @@
 import React, { Component } from '../../../node_modules/react';
 import SidePanel from '../side-panel/index';
+import View from '../../components/view/index';
 import './index.css';
 
 const placeHolderListItem = { label: 'Select a task', rows: [] };
 const sampleData = [
   placeHolderListItem,
-  { label: 'test', rows: [] },
+  { label: 'test', rows: [
+    { task: 'a', isComplete: false},
+    { task: 'b', isComplete: false},
+    { task: 'c', isComplete: false},
+  ]},
 ];
 
 class App extends Component {
@@ -21,7 +26,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('state', this.state.currentList);
     return (
       <div className="app">
         <SidePanel
@@ -30,6 +34,7 @@ class App extends Component {
           onChange={ this.handleChange }
         >
         </SidePanel>
+        <View list={ this.state.currentList }></View>
       </div>
     );
   }

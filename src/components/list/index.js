@@ -4,9 +4,17 @@ import Row from '../row/index';
 
 class List extends Component {
   getRows() {
-    const { list } = this.props;
+    const { list, handleCheck } = this.props;
 
-    return <Row label={ list.label } rows={ list.rows }></Row>
+    return list.rows.map((row, i) => (
+      <Row
+        key={ i }
+        rowDatum={ row }
+        label={ list.label }
+        handleCheck={ handleCheck }
+      >
+      </Row>
+    ));
   }
 
   render() {

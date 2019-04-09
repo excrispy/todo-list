@@ -4,11 +4,11 @@ import List from '../list/index';
 
 class View extends Component {
   render() {
-    const list = this.props.list;
+    const { list, handleCheck } = this.props;
 
     return (
       <div className="view">
-        <List list={ list }></List>
+        <List list={ list } handleCheck={ handleCheck }></List>
       </div>
     );
   }

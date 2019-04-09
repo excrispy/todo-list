@@ -25,6 +25,18 @@ class App extends Component {
     this.setState({ currentList });
   }
 
+  handleCheck = (rowDatum, label) => {
+    const clonedLists = [...this.state.lists];
+    const changedList = clonedLists.find(list => list.label === label);
+    changedList.rows.forEach(row => {
+      if (row.task === rowDatum.task) {
+        Object.assign(rowDatum, row);
+      }
+    });
+
+    // this.setState({ lists: clonedLists });
+  }
+
   render() {
     return (
       <div className="app">
@@ -34,7 +46,7 @@ class App extends Component {
           onChange={ this.handleChange }
         >
         </SidePanel>
-        <View list={ this.state.currentList }></View>
+        <View list={ this.state.currentList } handleCheck={ this.handleCheck }></View>
       </div>
     );
   }

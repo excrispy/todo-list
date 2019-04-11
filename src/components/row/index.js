@@ -5,12 +5,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 class Row extends Component {
   createRowLayout() {
-    const { rowDatum, label } = this.props;
+    const { rowDatum } = this.props;
 
     return (
-      <div className="row-wrapper">
+      <div className="row-wrapper" onClick={ this.handleClick }>
         <FormControlLabel
-          control={ <Checkbox></Checkbox> }
+          control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
           label={ rowDatum.task }
         >
         </FormControlLabel>
@@ -18,19 +18,17 @@ class Row extends Component {
     );
   }
   
-  handleClick(isChecked) {
+  handleClick = () => {
     const { rowDatum, label } = this.props;
-    const checkedStatus = !isChecked;
-    const newRowDatum = { task: rowDatum.task, isChecked: checkedStatus };
+    const checkedStatus = !rowDatum.isComplete;
+    const newRowDatum = { task: rowDatum.task, isComplete: checkedStatus };
 
     this.props.handleCheck(newRowDatum, label);
   }
 
   render() {
-    const isChecked = this.props.rowDatum;
-
     return (
-      <div className="row" onClick={ this.handleClick(isChecked) }>
+      <div className="row">
         { this.createRowLayout() }
       </div>
     );

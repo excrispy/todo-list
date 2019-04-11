@@ -20,21 +20,21 @@ class App extends Component {
     currentList: placeHolderListItem,
   };
 
-  handleChange = (e) => {
+  handleListChange = (e) => {
     const currentList = e.target.value;
     this.setState({ currentList });
   }
 
   handleCheck = (rowDatum, label) => {
     const clonedLists = [...this.state.lists];
-    const changedList = clonedLists.find(list => list.label === label);
-    changedList.rows.forEach(row => {
+    const updatedList = clonedLists.find(list => list.label === label);
+    updatedList.rows.forEach(row => {
       if (row.task === rowDatum.task) {
-        Object.assign(rowDatum, row);
+        Object.assign(row, rowDatum);
       }
     });
 
-    // this.setState({ lists: clonedLists });
+    this.setState({ lists: clonedLists });
   }
 
   render() {
@@ -43,7 +43,7 @@ class App extends Component {
         <SidePanel
           lists={ this.state.lists }
           currentList={ this.state.currentList }
-          onChange={ this.handleChange }
+          onChange={ this.handleListChange }
         >
         </SidePanel>
         <View list={ this.state.currentList } handleCheck={ this.handleCheck }></View>

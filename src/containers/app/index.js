@@ -2,6 +2,7 @@ import React, { Component } from '../../../node_modules/react';
 import SidePanel from '../side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
+import Template from '../../components/template';
 
 const placeHolderListItem = { label: 'Select a task', rows: [] };
 const sampleData = [
@@ -37,12 +38,27 @@ class App extends Component {
     this.setState({ lists: clonedLists });
   }
 
+  openListTemplate = () => {
+    this.setState({ templateIsOpen: true });
+  }
+
+  getTemplate = () => {
+    return this.state.templateIsOpen
+      ? (<Template
+          handleListSave={ this.handleListSave }
+          handleListCancel={ this.handleListCancel }>
+        </Template>)
+      : null;
+  }
+
   render() {
     return (
       <div className="app">
+        { this.getTemplate() }
         <SidePanel
           lists={ this.state.lists }
           currentList={ this.state.currentList }
+          openListTemplate={ this.openListTemplate }
           onChange={ this.handleListChange }
         >
         </SidePanel>

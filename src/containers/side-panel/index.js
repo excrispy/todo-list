@@ -3,6 +3,7 @@ import React, { Component } from '../../../node_modules/react';
 import Drawer from '@material-ui/core/Drawer';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import './index.css';
 
 class SidePanel extends Component {
@@ -11,7 +12,7 @@ class SidePanel extends Component {
   }
 
   render() {
-    const { lists, currentList, onChange } = this.props;
+    const { lists, currentList, onChange, openListTemplate } = this.props;
 
     return (
         <div>
@@ -27,6 +28,13 @@ class SidePanel extends Component {
             >
             </Select>
           </Drawer>
+          <Button
+            variant="contained"
+            style={ { zIndex: 1300 } }
+            onClick={ openListTemplate }
+          >
+            Add List
+          </Button>
         </div>
     );
   }

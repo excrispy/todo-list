@@ -15,26 +15,28 @@ class SidePanel extends Component {
     const { lists, currentList, onChange, openListTemplate } = this.props;
 
     return (
-        <div>
+        <div className="side-panel">
           <Drawer
             open={ true }
             variant="permanent"
             anchor="left"
           >
-            <Select
-              children={ this.getTasks() }
-              value={ currentList }
-              onChange={ onChange }
-            >
-            </Select>
+            <div className="panel-content">
+              <Select
+                children={ this.getTasks() }
+                value={ currentList }
+                onChange={ onChange }
+                >
+              </Select>
+              <Button
+                variant="contained"
+                style={ { zIndex: 1300 } }
+                onClick={ openListTemplate }
+                >
+                Add List
+              </Button>
+            </div>
           </Drawer>
-          <Button
-            variant="contained"
-            style={ { zIndex: 1300 } }
-            onClick={ openListTemplate }
-          >
-            Add List
-          </Button>
         </div>
     );
   }

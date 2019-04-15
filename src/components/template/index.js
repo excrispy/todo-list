@@ -28,12 +28,16 @@ class Template extends Component {
     return (
       <div className="template">
         <div className="content-wrapper">
-          <FormControl>
-            <InputLabel>List Name</InputLabel>
-            <Input></Input>
-          </FormControl>
-          <Button onClick={ handleListCancel }>Cancel</Button>
-          <Button onClick={ handleListSave }>Save</Button>
+          <div className="form-wrapper">
+            <FormControl>
+              <InputLabel>List Name</InputLabel>
+              <Input></Input>
+            </FormControl>
+          </div>
+          <div className="button-wrapper">
+            <Button onClick={ handleListCancel }>Cancel</Button>
+            <Button onClick={ handleListSave }>Save</Button>
+          </div>
         </div>
       </div>
     );

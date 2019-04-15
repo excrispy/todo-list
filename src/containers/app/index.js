@@ -16,6 +16,7 @@ const sampleData = [
 
 class App extends Component {
   state = {
+    drawerIsOpen: false,
     templateIsOpen: false,
     lists: sampleData,
     currentList: placeHolderListItem,
@@ -49,6 +50,20 @@ class App extends Component {
           handleListCancel={ this.handleListCancel }>
         </Template>)
       : null;
+  }
+
+  handleListSave = (newList) => {
+    const clonedLists = [...this.state.lists];
+    clonedLists.push(newList);
+
+    this.setState({
+      lists: clonedLists,
+      templateIsOpen: false,
+    });
+  }
+
+  handleListCancel = () => {
+    this.setState({ templateIsOpen: false });
   }
 
   render() {

@@ -5,7 +5,7 @@ import './index.css';
 import Template from '../../components/template';
 import Dialog from '@material-ui/core/Dialog';
 
-const placeHolderListItem = { listName: 'Select a task', taskRows: [] };
+const placeHolderListItem = { id: -1, listName: 'Select a task', taskRows: [] };
 const sampleData = [
   placeHolderListItem,
   { listName: 'test', taskRows: [
@@ -72,18 +72,38 @@ class App extends Component {
     this.setState({ templateIsOpen: false });
   }
 
+  handleDeleteList = (listName) => {
+    const newList = [];
+    this.state.lists.forEach(d => {
+      if (d.listName !== listName) {
+        newList.push(d);
+      }
+    });
+
+    this.setState({ lists: newList, currentList: newList[0] });
+  }
+
   render() {
     return (
       <div className="app">
         { this.getTemplate() }
-        <SidePanel
-          lists={ this.state.lists }
-          currentList={ this.state.currentList }
-          openListTemplate={ this.openListTemplate }
-          onChange={ this.handleListChange }
-        >
-        </SidePanel>
-        <View list={ this.state.currentList } handleCheck={ this.handleCheck }></View>
+        <div className="side-panel-wrapper">
+          <SidePanel
+            lists={ this.state.lists }
+            currentList={ this.state.currentList }
+            openListTemplate={ this.openListTemplate }
+            onChange={ this.handleListChange }
+            >
+          </SidePanel>
+        </div>
+        <div className="view-wrapper">
+          <View
+            list={ this.state.currentList }
+            handleCheck={ this.handleCheck }
+            handleDeleteList={ this.handleDeleteList }
+          >
+          </View>
+        </div>
       </div>
     );
   }

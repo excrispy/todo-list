@@ -1,4 +1,8 @@
 .view {
-    position: absolute;
-    left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete {
+    cursor: pointer;
 }

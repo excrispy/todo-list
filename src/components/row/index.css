@@ -1,6 +1,9 @@
 .row {
-    .row-wrapper {
-        display: flex;
-        flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column;
+}
+
+.disabled {
+    opacity: 0.4;
+    text-decoration: line-through;
 }

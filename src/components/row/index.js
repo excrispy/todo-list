@@ -8,13 +8,11 @@ class Row extends Component {
     const { rowDatum } = this.props;
 
     return (
-      <div className="row-wrapper" onClick={ this.handleClick }>
-        <FormControlLabel
-          control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
-          label={ rowDatum.taskName }
-        >
-        </FormControlLabel>
-      </div>
+      <FormControlLabel
+        control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
+        label={ rowDatum.taskName }
+      >
+      </FormControlLabel>
     );
   }
   
@@ -27,8 +25,10 @@ class Row extends Component {
   }
 
   render() {
+    const { rowDatum } = this.props;
+
     return (
-      <div className="row">
+      <div className={ rowDatum.isComplete ? "disabled" : "row" } onClick={ this.handleClick }>
         { this.createRowLayout() }
       </div>
     );

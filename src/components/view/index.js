@@ -24,12 +24,7 @@ class View extends Component {
 
   getDeleteButton() {
     return this.props.list.id !== -1 ?
-      (<div
-        className="delete"
-        onClick={ this.handleXClick }
-      >
-        X
-      </div>)
+      (<i className="material-icons" onClick={ this.handleXClick }>delete_forever</i>)
       : null;
   }
 

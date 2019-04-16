@@ -21,7 +21,9 @@ class Template extends Component {
           <div className="task-row-wrapper">
             <InputLabel>Task Name</InputLabel>
             <Input value={ d.taskName } onChange={ (e) => this.handleTaskChange(e, d.id) }></Input>
-            <Button onClick={ () => this.deleteTask(d.id) }>X</Button>
+            <Button onClick={ () => this.deleteTask(d.id) }>
+              <i className="material-icons">delete_forever</i>
+            </Button>
           </div>
         </FormControl>
       </div>

@@ -16,7 +16,6 @@ class SidePanel extends Component {
 
   render() {
     const { currentList, onChange, openListTemplate } = this.props;
-    console.log(this.props.drawerIsOpen);
 
     return (
         <div className="side-panel">

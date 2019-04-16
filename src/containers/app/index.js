@@ -46,7 +46,7 @@ class App extends Component {
 
   getTemplate = () => {
     return (
-      <Dialog open={ this.state.templateIsOpen }>
+      <Dialog open={ this.state.templateIsOpen } onClose={ this.handleClose }>
         <Template
           handleListSave={ this.handleListSave }
           handleListCancel={ this.handleListCancel }>
@@ -65,6 +65,10 @@ class App extends Component {
   }
 
   handleListCancel = () => {
+    this.setState({ templateIsOpen: false });
+  }
+
+  handleClose = () => {
     this.setState({ templateIsOpen: false });
   }
 

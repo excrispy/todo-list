@@ -12,7 +12,7 @@ class Template extends Component {
   };
 
   getTasks = () => {
-    return this.state.taskRows.map((d,i) => {
+    return this.state.taskRows.map(d => {
       return <div className={ d.id } key={ d.id }>
         <FormControl>
           <div className="task-row-wrapper">
@@ -70,19 +70,17 @@ class Template extends Component {
 
     return (
       <div className="template">
-        <div className="content-wrapper">
-          <div className="form-wrapper">
-            <FormControl>
-              <InputLabel>List Name</InputLabel>
-              <Input value={ this.state.listName } onChange={ this.handleLabelChange }></Input>
-            </FormControl>
-          </div>
-          { this.getTasks() }
-          <div className="button-wrapper">
-            <Button onClick={ this.addTask }>Add Task</Button>
-            <Button onClick={ handleListCancel }>Cancel</Button>
-            <Button onClick={ () => handleListSave(this.state) }>Save</Button>
-          </div>
+        <div className="form-wrapper">
+          <FormControl>
+            <InputLabel>List Name</InputLabel>
+            <Input value={ this.state.listName } onChange={ this.handleLabelChange }></Input>
+          </FormControl>
+        </div>
+        { this.getTasks() }
+        <div className="button-wrapper">
+          <Button onClick={ this.addTask }>Add Task</Button>
+          <Button onClick={ handleListCancel }>Cancel</Button>
+          <Button onClick={ () => handleListSave(this.state) }>Save</Button>
         </div>
       </div>
     );

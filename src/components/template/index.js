@@ -4,11 +4,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 class Template extends Component {
   state = {
     listName: '',
     taskRows: [{ id: 0, taskName: '', isCompleted: false }],
+    snackbarIsOpen: false,
   };
 
   getTasks = () => {
@@ -65,8 +68,21 @@ class Template extends Component {
     this.setState({ taskRows: clonedTasks });
   }
 
+  handleSave = () => {
+    if (!this.state.listName) {
+      this.setState({ snackbarIsOpen: true });
+      return;
+    }
+
+    this.props.handleListSave(this.state);
+  }
+
+  handleSnackbarClose = () => {
+    this.setState({ snackbarIsOpen: false });
+  }
+
   render() {
-    const { handleListSave, handleListCancel } = this.props;
+    const { handleListCancel } = this.props;
 
     return (
       <div className="template">
@@ -80,8 +96,26 @@ class Template extends Component {
         <div className="button-wrapper">
           <Button onClick={ this.addTask }>Add Task</Button>
           <Button onClick={ handleListCancel }>Cancel</Button>
-          <Button onClick={ () => handleListSave(this.state) }>Save</Button>
+          <Button onClick={ this.handleSave }>Save</Button>
         </div>
+        <Snackbar
+          anchorOrigin={ { vertical: 'bottom', horizontal: 'left' } }
+          open={ this.state.snackbarIsOpen }
+          autoHideDuration={ 4000 }
+          onClose={ this.handleSnackbarClose }
+          message={ <span>Must add a title to the new list before saving!</span> }
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={ this.handleSnackbarClose }
+            >
+              X
+            </IconButton>,
+          ]}
+        >
+        </Snackbar>
       </div>
     );
   }

@@ -4,6 +4,11 @@ import View from '../../components/view/index';
 import './index.css';
 import Template from '../../components/template';
 import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const placeHolderListItem = { id: -1, listName: 'Select a task', taskRows: [] };
 const sampleData = [
@@ -21,6 +26,7 @@ class App extends Component {
     templateIsOpen: false,
     lists: sampleData,
     currentList: placeHolderListItem,
+    drawerIsOpen: false,
   };
 
   handleListChange = (e) => {
@@ -83,27 +89,47 @@ class App extends Component {
     this.setState({ lists: newList, currentList: newList[0] });
   }
 
+  handleDrawerOpen = () => {
+    this.setState({ drawerIsOpen: true });
+  }
+
+  handleDrawerClose = () => {
+    this.setState({ drawerIsOpen: false });
+  }
+
   render() {
     return (
       <div className="app">
         { this.getTemplate() }
-        <div className="side-panel-wrapper">
-          <SidePanel
-            lists={ this.state.lists }
-            currentList={ this.state.currentList }
-            openListTemplate={ this.openListTemplate }
-            onChange={ this.handleListChange }
+        <AppBar position="fixed">
+          <Toolbar disableGutters={ this.state.drawerIsOpen }>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={ this.handleDrawerOpen }
             >
-          </SidePanel>
-        </div>
-        <div className="view-wrapper">
-          <View
-            list={ this.state.currentList }
-            handleCheck={ this.handleCheck }
-            handleDeleteList={ this.handleDeleteList }
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" noWrap>
+              TODO List
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <SidePanel
+          lists={ this.state.lists }
+          currentList={ this.state.currentList }
+          openListTemplate={ this.openListTemplate }
+          drawerIsOpen={ this.state.drawerIsOpen }
+          handleDrawerClose={ this.handleDrawerClose }
+          onChange={ this.handleListChange }
           >
-          </View>
-        </div>
+        </SidePanel>
+        <View
+          list={ this.state.currentList }
+          handleCheck={ this.handleCheck }
+          handleDeleteList={ this.handleDeleteList }
+        >
+        </View>
       </div>
     );
   }

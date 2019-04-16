@@ -4,11 +4,3 @@
     display: flex;
 }
 
-.side-panel-wrapper {
-    width: 30%;
-    min-width: 30%;
-}
-
-.view-wrapper {
-    width: 70%
-}

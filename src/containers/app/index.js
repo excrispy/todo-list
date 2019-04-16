@@ -9,9 +9,9 @@ const placeHolderListItem = { listName: 'Select a task', taskRows: [] };
 const sampleData = [
   placeHolderListItem,
   { listName: 'test', taskRows: [
-    { id: 0, taskName: 'a', isComplete: false},
-    { id: 1, taskName: 'b', isComplete: false},
-    { id: 2, taskName: 'c', isComplete: false},
+    { id: 0, taskName: 'a', isComplete: false },
+    { id: 1, taskName: 'b', isComplete: false },
+    { id: 2, taskName: 'c', isComplete: false },
   ]},
 ];
 
@@ -31,7 +31,7 @@ class App extends Component {
   handleCheck = (rowDatum, listName) => {
     const clonedLists = [...this.state.lists];
     const updatedList = clonedLists.find(list => list.listName === listName);
-    updatedList.rows.forEach(row => {
+    updatedList.taskRows.forEach(row => {
       if (row.taskName === rowDatum.taskName) {
         Object.assign(row, rowDatum);
       }

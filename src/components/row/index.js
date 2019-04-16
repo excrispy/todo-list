@@ -11,7 +11,7 @@ class Row extends Component {
       <div className="row-wrapper" onClick={ this.handleClick }>
         <FormControlLabel
           control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
-          label={ rowDatum.task }
+          label={ rowDatum.taskName }
         >
         </FormControlLabel>
       </div>
@@ -21,7 +21,7 @@ class Row extends Component {
   handleClick = () => {
     const { rowDatum, label } = this.props;
     const checkedStatus = !rowDatum.isComplete;
-    const newRowDatum = { task: rowDatum.task, isComplete: checkedStatus };
+    const newRowDatum = { taskName: rowDatum.taskName, isComplete: checkedStatus };
 
     this.props.handleCheck(newRowDatum, label);
   }

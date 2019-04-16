@@ -28,7 +28,7 @@ class Template extends Component {
   addTask = () => {
     const taskRows = [...this.state.taskRows];
     const lastTask = taskRows[taskRows.length - 1];
-    taskRows.push({ id: lastTask.id + 1, taskName: '' });
+    taskRows.push({ id: lastTask.id + 1, taskName: '', isCompleted: false });
 
     this.setState({ taskRows });
   }

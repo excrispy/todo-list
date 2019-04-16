@@ -8,11 +8,11 @@ import './index.css';
 
 class SidePanel extends Component {
   getTasks() {
-    return this.props.lists.map(d => <MenuItem value={ d }>{ d.label }</MenuItem> );
+    return this.props.lists.map(d => <MenuItem value={ d }>{ d.listName }</MenuItem> );
   }
 
   render() {
-    const { lists, currentList, onChange, openListTemplate } = this.props;
+    const { currentList, onChange, openListTemplate } = this.props;
 
     return (
         <div className="side-panel">

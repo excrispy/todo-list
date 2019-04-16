@@ -1,24 +1,11 @@
 .template {
   width: 100%;
   height: 100%;
-  background: rgba(211,211,211,0.2);
-  position: absolute;
-  z-index: 1400;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .content-wrapper {
-  background: #888888;
-  min-width: 50%;
-  min-height: 30%;
   padding: 0 20px 20px 20px;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  justify-content: space-between;
 }
 
 .button-wrapper {
@@ -26,3 +13,6 @@
   align-self: flex-end;
 }
 
+.task-row-wrapper {
+  display: flex;
+}

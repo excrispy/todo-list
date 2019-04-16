@@ -3,14 +3,15 @@ import SidePanel from '../side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
 import Template from '../../components/template';
+import Dialog from '@material-ui/core/Dialog';
 
-const placeHolderListItem = { label: 'Select a task', rows: [] };
+const placeHolderListItem = { listName: 'Select a task', taskRows: [] };
 const sampleData = [
   placeHolderListItem,
-  { label: 'test', rows: [
-    { task: 'a', isComplete: false},
-    { task: 'b', isComplete: false},
-    { task: 'c', isComplete: false},
+  { listName: 'test', taskRows: [
+    { id: 0, taskName: 'a', isComplete: false},
+    { id: 1, taskName: 'b', isComplete: false},
+    { id: 2, taskName: 'c', isComplete: false},
   ]},
 ];
 
@@ -27,11 +28,11 @@ class App extends Component {
     this.setState({ currentList });
   }
 
-  handleCheck = (rowDatum, label) => {
+  handleCheck = (rowDatum, listName) => {
     const clonedLists = [...this.state.lists];
-    const updatedList = clonedLists.find(list => list.label === label);
+    const updatedList = clonedLists.find(list => list.listName === listName);
     updatedList.rows.forEach(row => {
-      if (row.task === rowDatum.task) {
+      if (row.taskName === rowDatum.taskName) {
         Object.assign(row, rowDatum);
       }
     });
@@ -44,12 +45,13 @@ class App extends Component {
   }
 
   getTemplate = () => {
-    return this.state.templateIsOpen
-      ? (<Template
+    return (
+      <Dialog open={ this.state.templateIsOpen }>
+        <Template
           handleListSave={ this.handleListSave }
           handleListCancel={ this.handleListCancel }>
-        </Template>)
-      : null;
+        </Template>
+      </Dialog>);
   }
 
   handleListSave = (newList) => {

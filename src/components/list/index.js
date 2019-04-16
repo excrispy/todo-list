@@ -6,11 +6,11 @@ class List extends Component {
   getRows() {
     const { list, handleCheck } = this.props;
 
-    return list.rows.map((row, i) => (
+    return list.taskRows.map((row, i) => (
       <Row
         key={ i }
         rowDatum={ row }
-        label={ list.label }
+        label={ list.listName }
         handleCheck={ handleCheck }
       >
       </Row>
@@ -20,7 +20,7 @@ class List extends Component {
   render() {
     return (
       <div className="list">
-        <div className="title">{ this.props.list.label }</div>
+        <div className="title">{ this.props.list.listName }</div>
         { this.getRows() }
       </div>
     );

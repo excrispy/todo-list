@@ -1,9 +1,3 @@
-.panel-content {
-	display: flex;
-	flex-direction: column;
-	align-content: space-between;
-}
-
 .add-button {
 	padding: 30px 10px;
 }

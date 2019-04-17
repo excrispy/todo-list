@@ -27,21 +27,19 @@ class SidePanel extends Component {
           <ChevronLeftIcon />
         </IconButton>
         <Divider />
-        <div className="panel-content">
-          <Select
-            children={ this.getTasks() }
-            value={ selectedList }
-            onChange={ handleChangeSelectedList }
+        <Select
+          children={ this.getTasks() }
+          value={ selectedList }
+          onChange={ handleChangeSelectedList }
+        >
+        </Select>
+        <div className="add-button">
+          <Button
+            variant="contained"
+            onClick={ openListTemplate }
           >
-          </Select>
-          <div className="add-button">
-            <Button
-              variant="contained"
-              onClick={ openListTemplate }
-            >
-              Add List
-            </Button>
-          </div>
+            Add List
+          </Button>
         </div>
       </Drawer>
     );

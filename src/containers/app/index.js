@@ -1,5 +1,5 @@
 import React, { Component } from '../../../node_modules/react';
-import SidePanel from '../side-panel/index';
+import SidePanel from '../../components/side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
 import Template from '../../components/template';

@@ -14,7 +14,7 @@ class View extends Component {
   }
 
   getDeleteButton() {
-    return this.props.list.id !== -1 ?
+    return this.props.selectedList.id !== -1 ?
       (<div className="delete">
         <i className="material-icons" onClick={ this.handleDeleteTask }>
           delete_forever
@@ -37,7 +37,7 @@ class View extends Component {
   }
 
   render() {
-    const { list, handleCheckTask } = this.props;
+    const { selectedList, handleCheckTask } = this.props;
 
     return (
       <div className="view">
@@ -55,12 +55,12 @@ class View extends Component {
             <Button onClick={ this.handleCloseDeleteDialog } color="primary">
               Cancel
             </Button>
-            <Button onClick={ () => this.handleDeleteList(this.props.list.listName) } color="primary" autoFocus>
+            <Button onClick={ () => this.handleDeleteList(this.props.selectedList.listName) } color="primary" autoFocus>
               Yes
             </Button>
           </DialogActions>
         </Dialog>
-        <List list={ list } handleCheckTask={ handleCheckTask }></List>
+        <List list={ selectedList } handleCheckTask={ handleCheckTask }></List>
         { this.getDeleteButton() }
       </div>
     );

@@ -15,12 +15,12 @@ class App extends Component {
     drawerIsOpen: false,
     listDialogIsOpen: false,
     lists: sampleData,
-    currentList: placeHolderListItem,
+    selectedList: placeHolderListItem,
   };
 
-  handleListChange = (e) => {
-    const currentList = e.target.value;
-    this.setState({ currentList });
+  handleChangeSelectedList = (e) => {
+    const selectedList = e.target.value;
+    this.setState({ selectedList });
   }
 
   handleCheckTask = (rowDatum, listName) => {
@@ -65,14 +65,14 @@ class App extends Component {
       }
     });
 
-    this.setState({ lists: newList, currentList: newList[0] });
+    this.setState({ lists: newList, selectedList: newList[0] });
   }
 
-  handleDrawerOpen = () => {
+  handleOpenDrawer = () => {
     this.setState({ drawerIsOpen: true });
   }
 
-  handleDrawerClose = () => {
+  handleCloseDrawer = () => {
     this.setState({ drawerIsOpen: false });
   }
 
@@ -91,7 +91,7 @@ class App extends Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={ this.handleDrawerOpen }
+              onClick={ this.handleOpenDrawer }
             >
               <MenuIcon />
             </IconButton>
@@ -102,15 +102,15 @@ class App extends Component {
         </AppBar>
         <SidePanel
           lists={ this.state.lists }
-          currentList={ this.state.currentList }
+          selectedList={ this.state.selectedList }
           openListTemplate={ this.handleOpenListDialog }
           drawerIsOpen={ this.state.drawerIsOpen }
-          handleDrawerClose={ this.handleDrawerClose }
-          onChange={ this.handleListChange }
+          handleCloseDrawer={ this.handleCloseDrawer }
+          handleChangeSelectedList={ this.handleChangeSelectedList }
           >
         </SidePanel>
         <View
-          list={ this.state.currentList }
+          selectedList={ this.state.selectedList }
           handleCheckTask={ this.handleCheckTask }
           handleDeleteList={ this.handleDeleteList }
         >

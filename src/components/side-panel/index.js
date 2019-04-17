@@ -15,7 +15,7 @@ class SidePanel extends Component {
   }
 
   render() {
-    const { currentList, onChange, openListTemplate } = this.props;
+    const { selectedList, handleChangeSelectedList, openListTemplate } = this.props;
 
     return (
       <Drawer
@@ -23,15 +23,15 @@ class SidePanel extends Component {
         anchor="left"
         open={ this.props.drawerIsOpen }
       >
-        <IconButton onClick={ this.props.handleDrawerClose }>
+        <IconButton onClick={ this.props.handleCloseDrawer }>
           <ChevronLeftIcon />
         </IconButton>
         <Divider />
         <div className="panel-content">
           <Select
             children={ this.getTasks() }
-            value={ currentList }
-            onChange={ onChange }
+            value={ selectedList }
+            onChange={ handleChangeSelectedList }
           >
           </Select>
           <div className="add-button">

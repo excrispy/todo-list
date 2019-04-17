@@ -35,13 +35,14 @@ class SidePanel extends Component {
                 onChange={ onChange }
                 >
               </Select>
-              <Button
-                variant="contained"
-                style={ { zIndex: 1300 } }
-                onClick={ openListTemplate }
+              <div className="add-button">
+                <Button
+                  variant="contained"
+                  onClick={ openListTemplate }
                 >
-                Add List
-              </Button>
+                  Add List
+                </Button>
+              </div>
             </div>
           </Drawer>
         </div>

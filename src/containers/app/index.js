@@ -3,6 +3,7 @@ import SidePanel from '../../components/side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
 import ListTemplateDialog from '../../components/list-template-dialog';
+import EditListDialog from '../../components/edit-list-dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -26,34 +27,22 @@ class App extends Component {
         onClose={ this.handleClose }
         handleSaveList={ this.handleSaveList }
         handleCloseListDialog={ this.handleCloseListDialog }
+        handleDeleteList={ this.handleDeleteList }
       >
       </ListTemplateDialog>)
       : null;
   }
 
-  // getDeleteListDialog = () => {
-  //   return this.state.deleteDialogIsOpen
-  //     ? (<Dialog
-  //       open={ this.state.deleteDialogIsOpen }
-  //       onClose={ this.handleCloseDeleteDialog }
-  //       aria-labelledby="alert-dialog-title"
-  //       aria-describedby="alert-dialog-description"
-  //       >
-  //         <DialogTitle>Are you sure you want to delete this list?</DialogTitle>
-  //         <DialogContent>
-  //           <DialogContentText>This action cannot be undone!</DialogContentText>
-  //         </DialogContent>
-  //         <DialogActions>
-  //           <Button onClick={ this.handleCloseDeleteDialog } color="primary">
-  //             Cancel
-  //           </Button>
-  //           <Button onClick={ () => this.handleDeleteList(this.props.selectedList.listName) } color="primary" autoFocus>
-  //             Yes
-  //           </Button>
-  //         </DialogActions>
-  //       </Dialog>)
-  //     : null;
-  // }
+  getDeleteListDialog = () => {
+    return this.state.deleteDialogIsOpen
+      ? (<EditListDialog
+        deleteDialogIsOpen={ this.state.deleteDialogIsOpen }
+        handleCloseDeleteDialog={ this.handleCloseDeleteDialog }
+        selectedList={ this.state.selectedList }
+      >
+      </EditListDialog>)
+      : null;
+  }
 
   handleChangeSelectedList = (e) => {
     const selectedList = e.target.value;

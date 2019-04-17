@@ -4,17 +4,15 @@ import List from '../list/index';
 
 class View extends Component {
   getDeleteButton() {
-    return this.props.selectedList.id !== -1 && this.props.deleteDialogIsOpen ?
+    const { selectedList, handleDeleteTask } = this.props;
+
+    return selectedList.id !== -1 ?
       (<div className="delete">
-        <i className="material-icons" onClick={ this.handleDeleteTask }>
+        <i className="material-icons" onClick={ handleDeleteTask }>
           delete_forever
         </i>
       </div>)
       : null;
-  }
-
-  handleDeleteTask = () => {
-    this.setState({ deleteDialogIsOpen: true });
   }
 
   render() {

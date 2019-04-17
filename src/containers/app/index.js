@@ -102,11 +102,15 @@ class App extends Component {
     this.setState({ drawerIsOpen: false });
   }
 
+  handleDeleteTask = () => {
+    this.setState({ deleteDialogIsOpen: true });
+  }
+
   render() {
     return (
       <div className="app">
         { this.getListTemplateDialog() }
-        {/* { this.getDeleteListDialog() } */}
+        { this.getDeleteListDialog() }
         <AppBar position="fixed">
           <Toolbar disableGutters={ this.state.drawerIsOpen }>
             <IconButton
@@ -133,6 +137,7 @@ class App extends Component {
         <View
           selectedList={ this.state.selectedList }
           handleCheckTask={ this.handleCheckTask }
+          handleDeleteTask={ this.handleDeleteTask }
         >
         </View>
       </div>

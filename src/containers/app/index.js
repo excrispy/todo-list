@@ -2,7 +2,7 @@ import React, { Component } from '../../../node_modules/react';
 import SidePanel from '../../components/side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
-import Template from '../../components/template';
+import ListTemplateDialog from '../../components/list-template-dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,21 +14,46 @@ class App extends Component {
   state = {
     drawerIsOpen: false,
     listDialogIsOpen: false,
+    deleteDialogIsOpen: false,
     lists: sampleData,
     selectedList: placeHolderListItem,
   };
 
-  getTemplate = () => {
+  getListTemplateDialog = () => {
     return this.state.listDialogIsOpen ? 
-      (<Template
+      (<ListTemplateDialog
         isOpen={ this.state.listDialogIsOpen }
         onClose={ this.handleClose }
         handleSaveList={ this.handleSaveList }
         handleCloseListDialog={ this.handleCloseListDialog }
       >
-      </Template>)
+      </ListTemplateDialog>)
       : null;
   }
+
+  // getDeleteListDialog = () => {
+  //   return this.state.deleteDialogIsOpen
+  //     ? (<Dialog
+  //       open={ this.state.deleteDialogIsOpen }
+  //       onClose={ this.handleCloseDeleteDialog }
+  //       aria-labelledby="alert-dialog-title"
+  //       aria-describedby="alert-dialog-description"
+  //       >
+  //         <DialogTitle>Are you sure you want to delete this list?</DialogTitle>
+  //         <DialogContent>
+  //           <DialogContentText>This action cannot be undone!</DialogContentText>
+  //         </DialogContent>
+  //         <DialogActions>
+  //           <Button onClick={ this.handleCloseDeleteDialog } color="primary">
+  //             Cancel
+  //           </Button>
+  //           <Button onClick={ () => this.handleDeleteList(this.props.selectedList.listName) } color="primary" autoFocus>
+  //             Yes
+  //           </Button>
+  //         </DialogActions>
+  //       </Dialog>)
+  //     : null;
+  // }
 
   handleChangeSelectedList = (e) => {
     const selectedList = e.target.value;
@@ -73,7 +98,11 @@ class App extends Component {
       }
     });
 
-    this.setState({ lists: newList, selectedList: newList[0] });
+    this.setState({ deleteDialogIsOpen: false, lists: newList, selectedList: newList[0] });
+  }
+
+  handleCloseDeleteDialog = () => {
+    this.setState({ deleteDialogIsOpen: false });
   }
 
   handleOpenDrawer = () => {
@@ -87,7 +116,8 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        { this.getTemplate() }
+        { this.getListTemplateDialog() }
+        {/* { this.getDeleteListDialog() } */}
         <AppBar position="fixed">
           <Toolbar disableGutters={ this.state.drawerIsOpen }>
             <IconButton
@@ -114,7 +144,6 @@ class App extends Component {
         <View
           selectedList={ this.state.selectedList }
           handleCheckTask={ this.handleCheckTask }
-          handleDeleteList={ this.handleDeleteList }
         >
         </View>
       </div>

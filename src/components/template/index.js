@@ -10,11 +10,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { templateTaskRow } from '../../constants/sample-data';
 
 class Template extends Component {
   state = {
     listName: '',
-    taskRows: [{ id: 0, taskName: '', isCompleted: false }],
+    taskRows: templateTaskRow,
     snackbarIsOpen: false,
   };
 
@@ -37,7 +38,7 @@ class Template extends Component {
   clearListTemplate = () => {
     this.setState({
       listName: '',
-      taskRows: [{ id: 0, taskName: '', isCompleted: false }],
+      taskRows: templateTaskRow,
     });
   }
 

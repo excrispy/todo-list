@@ -1,5 +1,5 @@
 
-import React, { Component } from '../../../node_modules/react';
+import React, { Component } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';

@@ -23,15 +23,14 @@ const sampleData = [
 class App extends Component {
   state = {
     drawerIsOpen: false,
-    templateIsOpen: false,
+    listDialogIsOpen: false,
     lists: sampleData,
     currentList: placeHolderListItem,
-    drawerIsOpen: false,
   };
 
   getTemplate = () => {
     return (
-      <Dialog open={ this.state.templateIsOpen } onClose={ this.handleClose }>
+      <Dialog open={ this.state.listDialogIsOpen } onClose={ this.handleClose }>
         <Template
           handleListSave={ this.handleListSave }
           handleListCancel={ this.handleListCancel }>
@@ -44,7 +43,7 @@ class App extends Component {
     this.setState({ currentList });
   }
 
-  handleCheck = (rowDatum, listName) => {
+  handleCheckTask = (rowDatum, listName) => {
     const clonedLists = [...this.state.lists];
     const updatedList = clonedLists.find(list => list.listName === listName);
     updatedList.taskRows.forEach(row => {
@@ -57,7 +56,7 @@ class App extends Component {
   }
 
   handleOpenListTemplate = () => {
-    this.setState({ templateIsOpen: true });
+    this.setState({ listDialogIsOpen: true });
   }
 
   handleListSave = (newList) => {
@@ -66,16 +65,16 @@ class App extends Component {
 
     this.setState({
       lists: clonedLists,
-      templateIsOpen: false,
+      listDialogIsOpen: false,
     });
   }
 
   handleListCancel = () => {
-    this.setState({ templateIsOpen: false });
+    this.setState({ listDialogIsOpen: false });
   }
 
   handleClose = () => {
-    this.setState({ templateIsOpen: false });
+    this.setState({ listDialogIsOpen: false });
   }
 
   handleDeleteList = (listName) => {
@@ -126,7 +125,7 @@ class App extends Component {
         </SidePanel>
         <View
           list={ this.state.currentList }
-          handleCheck={ this.handleCheck }
+          handleCheckTask={ this.handleCheckTask }
           handleDeleteList={ this.handleDeleteList }
         >
         </View>

@@ -20,8 +20,8 @@ class Template extends Component {
         <FormControl>
           <div className="task-row-wrapper">
             <InputLabel>Task Name</InputLabel>
-            <Input value={ d.taskName } onChange={ (e) => this.handleTaskChange(e, d.id) }></Input>
-            <Button onClick={ () => this.deleteTask(d.id) }>
+            <Input value={ d.taskName } onChange={ (e) => this.handleTaskNameChange(e, d.id) }></Input>
+            <Button onClick={ () => this.handleDeleteTask(d.id) }>
               <i className="material-icons">delete_forever</i>
             </Button>
           </div>
@@ -30,7 +30,7 @@ class Template extends Component {
     });
   }
 
-  addTask = () => {
+  handleAddTask = () => {
     const taskRows = [...this.state.taskRows];
     const lastTask = taskRows[taskRows.length - 1];
     taskRows.push({ id: lastTask.id + 1, taskName: '', isCompleted: false });
@@ -38,7 +38,7 @@ class Template extends Component {
     this.setState({ taskRows });
   }
 
-  deleteTask = (id) => {
+  handleDeleteTask = (id) => {
     const currentTasks = this.state.taskRows;
     if (currentTasks.length === 1) {
       const task = Object.assign(currentTasks[0], { taskName: '' });
@@ -56,11 +56,11 @@ class Template extends Component {
     this.setState({ taskRows: clonedTasks });
   }
 
-  handleLabelChange = (e) => {
+  handleListNameChange = (e) => {
     this.setState({ listName: e.target.value });
   }
 
-  handleTaskChange = (e, id) => {
+  handleTaskNameChange = (e, id) => {
     const clonedTasks = [...this.state.taskRows];
     clonedTasks.forEach(d => {
       if (id === d.id) {
@@ -70,7 +70,7 @@ class Template extends Component {
     this.setState({ taskRows: clonedTasks });
   }
 
-  handleSave = () => {
+  handleSaveList = () => {
     if (!this.state.listName) {
       this.setState({ snackbarIsOpen: true });
       return;
@@ -79,39 +79,40 @@ class Template extends Component {
     this.props.handleListSave(this.state);
   }
 
-  handleSnackbarClose = () => {
+  handleCloseSnackbar = () => {
     this.setState({ snackbarIsOpen: false });
   }
 
   render() {
     const { handleListCancel } = this.props;
+    const { listName, snackbarIsOpen } = this.state;
 
     return (
       <div className="template">
         <div className="form-wrapper">
           <FormControl>
             <InputLabel>List Name</InputLabel>
-            <Input value={ this.state.listName } onChange={ this.handleLabelChange }></Input>
+            <Input value={ listName } onChange={ this.handleListNameChange }></Input>
           </FormControl>
         </div>
         { this.getTasks() }
         <div className="button-wrapper">
-          <Button onClick={ this.addTask }>Add Task</Button>
+          <Button onClick={ this.handleAddTask }>Add Task</Button>
           <Button onClick={ handleListCancel }>Cancel</Button>
-          <Button onClick={ this.handleSave }>Save</Button>
+          <Button onClick={ this.handleSaveList }>Save</Button>
         </div>
         <Snackbar
           anchorOrigin={ { vertical: 'bottom', horizontal: 'left' } }
-          open={ this.state.snackbarIsOpen }
+          open={ snackbarIsOpen }
           autoHideDuration={ 4000 }
-          onClose={ this.handleSnackbarClose }
+          onClose={ this.handleCloseSnackbar }
           message={ <span>Must add a title to the new list before saving!</span> }
           action={[
             <IconButton
               key="close"
               aria-label="Close"
               color="inherit"
-              onClick={ this.handleSnackbarClose }
+              onClick={ this.handleCloseSnackbar }
             >
               X
             </IconButton>,

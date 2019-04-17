@@ -4,19 +4,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 class Row extends Component {
-  handleClick = () => {
+  handleCheckTask = () => {
     const { rowDatum, label } = this.props;
     const checkedStatus = !rowDatum.isComplete;
     const newRowDatum = { taskName: rowDatum.taskName, isComplete: checkedStatus };
 
-    this.props.handleCheck(newRowDatum, label);
+    this.props.handleCheckTask(newRowDatum, label);
   }
 
   render() {
     const { rowDatum } = this.props;
 
     return (
-      <div className={ rowDatum.isComplete ? "disabled" : "row" } onClick={ this.handleClick }>
+      <div className={ rowDatum.isComplete ? "disabled" : "row" } onClick={ this.handleCheckTask }>
         <FormControlLabel
           control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
           label={ rowDatum.taskName }

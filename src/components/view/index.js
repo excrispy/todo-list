@@ -10,13 +10,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 class View extends Component {
   state = {
-    dialogIsOpen: false,
+    deleteDialogIsOpen: false,
   }
 
   getDeleteButton() {
     return this.props.list.id !== -1 ?
       (<div className="delete">
-        <i className="material-icons" onClick={ this.handleXClick }>
+        <i className="material-icons" onClick={ this.handleDeleteTask }>
           delete_forever
         </i>
       </div>)
@@ -24,26 +24,26 @@ class View extends Component {
   }
 
   handleDeleteList = (listName) => {
-    this.setState({ dialogIsOpen: false });
+    this.setState({ deleteDialogIsOpen: false });
     this.props.handleDeleteList(listName);
   }
 
-  handleClose = () => {
-    this.setState({ dialogIsOpen: false });
+  handleCloseDeleteDialog = () => {
+    this.setState({ deleteDialogIsOpen: false });
   }
 
-  handleXClick = () => {
-    this.setState({ dialogIsOpen: true });
+  handleDeleteTask = () => {
+    this.setState({ deleteDialogIsOpen: true });
   }
 
   render() {
-    const { list, handleCheck } = this.props;
+    const { list, handleCheckTask } = this.props;
 
     return (
       <div className="view">
         <Dialog
-          open={ this.state.dialogIsOpen }
-          onClose={ this.handleClose }
+          open={ this.state.deleteDialogIsOpen }
+          onClose={ this.handleCloseDeleteDialog }
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -52,7 +52,7 @@ class View extends Component {
             <DialogContentText id="alert-dialog-description">This action cannot be undone!</DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={ this.handleClose } color="primary">
+            <Button onClick={ this.handleCloseDeleteDialog } color="primary">
               Cancel
             </Button>
             <Button onClick={ () => this.handleDeleteList(this.props.list.listName) } color="primary" autoFocus>
@@ -60,7 +60,7 @@ class View extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <List list={ list } handleCheck={ handleCheck }></List>
+        <List list={ list } handleCheckTask={ handleCheckTask }></List>
         { this.getDeleteButton() }
       </div>
     );

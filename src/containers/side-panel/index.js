@@ -18,34 +18,32 @@ class SidePanel extends Component {
     const { currentList, onChange, openListTemplate } = this.props;
 
     return (
-        <div className="side-panel">
-          <Drawer
-            variant="persistent"
-            anchor="left"
-            open={ this.props.drawerIsOpen }
+      <Drawer
+        variant="persistent"
+        anchor="left"
+        open={ this.props.drawerIsOpen }
+      >
+        <IconButton onClick={ this.props.handleDrawerClose }>
+          <ChevronLeftIcon />
+        </IconButton>
+        <Divider />
+        <div className="panel-content">
+          <Select
+            children={ this.getTasks() }
+            value={ currentList }
+            onChange={ onChange }
           >
-            <IconButton onClick={ this.props.handleDrawerClose }>
-              <ChevronLeftIcon />
-            </IconButton>
-            <Divider />
-            <div className="panel-content">
-              <Select
-                children={ this.getTasks() }
-                value={ currentList }
-                onChange={ onChange }
-                >
-              </Select>
-              <div className="add-button">
-                <Button
-                  variant="contained"
-                  onClick={ openListTemplate }
-                >
-                  Add List
-                </Button>
-              </div>
-            </div>
-          </Drawer>
+          </Select>
+          <div className="add-button">
+            <Button
+              variant="contained"
+              onClick={ openListTemplate }
+            >
+              Add List
+            </Button>
+          </div>
         </div>
+      </Drawer>
     );
   }
 }

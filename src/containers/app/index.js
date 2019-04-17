@@ -13,10 +13,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 const placeHolderListItem = { id: -1, listName: 'Select a task', taskRows: [] };
 const sampleData = [
   placeHolderListItem,
-  { listName: 'test', taskRows: [
-    { id: 0, taskName: 'a', isComplete: false },
-    { id: 1, taskName: 'b', isComplete: false },
-    { id: 2, taskName: 'c', isComplete: false },
+  { listName: 'Sample Task', taskRows: [
+    { id: 0, taskName: 'Wake up', isComplete: false },
+    { id: 1, taskName: 'Code', isComplete: false },
+    { id: 2, taskName: 'Sleep', isComplete: false },
   ]},
 ];
 
@@ -28,6 +28,16 @@ class App extends Component {
     currentList: placeHolderListItem,
     drawerIsOpen: false,
   };
+
+  getTemplate = () => {
+    return (
+      <Dialog open={ this.state.templateIsOpen } onClose={ this.handleClose }>
+        <Template
+          handleListSave={ this.handleListSave }
+          handleListCancel={ this.handleListCancel }>
+        </Template>
+      </Dialog>);
+  }
 
   handleListChange = (e) => {
     const currentList = e.target.value;
@@ -46,18 +56,8 @@ class App extends Component {
     this.setState({ lists: clonedLists });
   }
 
-  openListTemplate = () => {
+  handleOpenListTemplate = () => {
     this.setState({ templateIsOpen: true });
-  }
-
-  getTemplate = () => {
-    return (
-      <Dialog open={ this.state.templateIsOpen } onClose={ this.handleClose }>
-        <Template
-          handleListSave={ this.handleListSave }
-          handleListCancel={ this.handleListCancel }>
-        </Template>
-      </Dialog>);
   }
 
   handleListSave = (newList) => {
@@ -118,7 +118,7 @@ class App extends Component {
         <SidePanel
           lists={ this.state.lists }
           currentList={ this.state.currentList }
-          openListTemplate={ this.openListTemplate }
+          openListTemplate={ this.handleOpenListTemplate }
           drawerIsOpen={ this.state.drawerIsOpen }
           handleDrawerClose={ this.handleDrawerClose }
           onChange={ this.handleListChange }

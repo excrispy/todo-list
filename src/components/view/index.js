@@ -13,15 +13,6 @@ class View extends Component {
     dialogIsOpen: false,
   }
 
-  handleDeleteList = (listName) => {
-    this.setState({ dialogIsOpen: false });
-    this.props.handleDeleteList(listName);
-  }
-
-  handleClose = () => {
-    this.setState({ dialogIsOpen: false });
-  }
-
   getDeleteButton() {
     return this.props.list.id !== -1 ?
       (<div className="delete">
@@ -30,6 +21,15 @@ class View extends Component {
         </i>
       </div>)
       : null;
+  }
+
+  handleDeleteList = (listName) => {
+    this.setState({ dialogIsOpen: false });
+    this.props.handleDeleteList(listName);
+  }
+
+  handleClose = () => {
+    this.setState({ dialogIsOpen: false });
   }
 
   handleXClick = () => {
@@ -49,8 +49,7 @@ class View extends Component {
         >
           <DialogTitle id="alert-dialog-title">Are you sure you want to delete this list?</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">This action cannot be undone!
-            </DialogContentText>
+            <DialogContentText id="alert-dialog-description">This action cannot be undone!</DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={ this.handleClose } color="primary">

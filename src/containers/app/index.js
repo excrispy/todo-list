@@ -3,22 +3,12 @@ import SidePanel from '../../components/side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
 import Template from '../../components/template';
-import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-
-const placeHolderListItem = { id: -1, listName: 'Select a task', taskRows: [] };
-const sampleData = [
-  placeHolderListItem,
-  { listName: 'Sample Task', taskRows: [
-    { id: 0, taskName: 'Wake up', isComplete: false },
-    { id: 1, taskName: 'Code', isComplete: false },
-    { id: 2, taskName: 'Sleep', isComplete: false },
-  ]},
-];
+import { placeHolderListItem, sampleData } from '../../constants/sample-data';
 
 class App extends Component {
   state = {
@@ -27,16 +17,6 @@ class App extends Component {
     lists: sampleData,
     currentList: placeHolderListItem,
   };
-
-  getTemplate = () => {
-    return (
-      <Dialog open={ this.state.listDialogIsOpen } onClose={ this.handleClose }>
-        <Template
-          handleListSave={ this.handleListSave }
-          handleListCancel={ this.handleListCancel }>
-        </Template>
-      </Dialog>);
-  }
 
   handleListChange = (e) => {
     const currentList = e.target.value;
@@ -55,11 +35,11 @@ class App extends Component {
     this.setState({ lists: clonedLists });
   }
 
-  handleOpenListTemplate = () => {
+  handleOpenListDialog = () => {
     this.setState({ listDialogIsOpen: true });
   }
 
-  handleListSave = (newList) => {
+  handleSaveList = (newList) => {
     const clonedLists = [...this.state.lists];
     clonedLists.push(newList);
 
@@ -69,11 +49,11 @@ class App extends Component {
     });
   }
 
-  handleListCancel = () => {
+  handleCloseList = () => {
     this.setState({ listDialogIsOpen: false });
   }
 
-  handleClose = () => {
+  handleCloseListDialog = () => {
     this.setState({ listDialogIsOpen: false });
   }
 
@@ -99,7 +79,13 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        { this.getTemplate() }
+        <Template
+          isOpen={ this.state.listDialogIsOpen }
+          onClose={ this.handleClose }
+          handleSaveList={ this.handleSaveList }
+          handleCloseList={ this.handleCloseList }
+        >
+        </Template>
         <AppBar position="fixed">
           <Toolbar disableGutters={ this.state.drawerIsOpen }>
             <IconButton
@@ -117,7 +103,7 @@ class App extends Component {
         <SidePanel
           lists={ this.state.lists }
           currentList={ this.state.currentList }
-          openListTemplate={ this.handleOpenListTemplate }
+          openListTemplate={ this.handleOpenListDialog }
           drawerIsOpen={ this.state.drawerIsOpen }
           handleDrawerClose={ this.handleDrawerClose }
           onChange={ this.handleListChange }

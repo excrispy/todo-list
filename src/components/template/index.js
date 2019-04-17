@@ -6,6 +6,10 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class Template extends Component {
   state = {
@@ -27,6 +31,13 @@ class Template extends Component {
           </div>
         </FormControl>
       </div>
+    });
+  }
+
+  clearListTemplate = () => {
+    this.setState({
+      listName: '',
+      taskRows: [{ id: 0, taskName: '', isCompleted: false }],
     });
   }
 
@@ -70,13 +81,19 @@ class Template extends Component {
     this.setState({ taskRows: clonedTasks });
   }
 
+  handleCloseList = () => {
+    this.props.handleCloseList();
+    this.clearListTemplate();
+  }
+
   handleSaveList = () => {
     if (!this.state.listName) {
       this.setState({ snackbarIsOpen: true });
       return;
     }
 
-    this.props.handleListSave(this.state);
+    this.props.handleSaveList(this.state);
+    this.clearListTemplate();
   }
 
   handleCloseSnackbar = () => {
@@ -84,23 +101,24 @@ class Template extends Component {
   }
 
   render() {
-    const { handleListCancel } = this.props;
+    const { isOpen, onClose, handleCloseList } = this.props;
     const { listName, snackbarIsOpen } = this.state;
 
     return (
-      <div className="template">
-        <div className="form-wrapper">
+      <Dialog open={ isOpen } onClose={ onClose }>
+        <DialogTitle>Create a new TODO list</DialogTitle>
+        <DialogContent>
           <FormControl>
             <InputLabel>List Name</InputLabel>
             <Input value={ listName } onChange={ this.handleListNameChange }></Input>
           </FormControl>
-        </div>
-        { this.getTasks() }
-        <div className="button-wrapper">
+          { this.getTasks() }
+        </DialogContent>
+        <DialogActions>
           <Button onClick={ this.handleAddTask }>Add Task</Button>
-          <Button onClick={ handleListCancel }>Cancel</Button>
+          <Button onClick={ this.handleCloseList }>Cancel</Button>
           <Button onClick={ this.handleSaveList }>Save</Button>
-        </div>
+        </DialogActions>
         <Snackbar
           anchorOrigin={ { vertical: 'bottom', horizontal: 'left' } }
           open={ snackbarIsOpen }
@@ -119,7 +137,7 @@ class Template extends Component {
           ]}
         >
         </Snackbar>
-      </div>
+      </Dialog>
     );
   }
 }

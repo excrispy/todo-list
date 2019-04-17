@@ -47,9 +47,9 @@ class View extends Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Are you sure you want to delete this list?</DialogTitle>
+          <DialogTitle>Are you sure you want to delete this list?</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">This action cannot be undone!</DialogContentText>
+            <DialogContentText>This action cannot be undone!</DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={ this.handleCloseDeleteDialog } color="primary">

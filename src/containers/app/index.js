@@ -24,7 +24,7 @@ class App extends Component {
         isOpen={ this.state.listDialogIsOpen }
         onClose={ this.handleClose }
         handleSaveList={ this.handleSaveList }
-        handleCloseList={ this.handleCloseList }
+        handleCloseListDialog={ this.handleCloseListDialog }
       >
       </Template>)
       : null;
@@ -59,10 +59,6 @@ class App extends Component {
       lists: clonedLists,
       listDialogIsOpen: false,
     });
-  }
-
-  handleCloseList = () => {
-    this.setState({ listDialogIsOpen: false });
   }
 
   handleCloseListDialog = () => {

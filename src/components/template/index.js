@@ -88,7 +88,7 @@ class Template extends Component {
   }
 
   render() {
-    const { isOpen, onClose, handleCloseList } = this.props;
+    const { isOpen, onClose, handleCloseListDialog } = this.props;
     const { listName, snackbarIsOpen } = this.state;
 
     return (
@@ -103,7 +103,7 @@ class Template extends Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={ this.handleAddTask }>Add Task</Button>
-          <Button onClick={ handleCloseList }>Cancel</Button>
+          <Button onClick={ handleCloseListDialog }>Cancel</Button>
           <Button onClick={ this.handleSaveList }>Save</Button>
         </DialogActions>
         <Snackbar

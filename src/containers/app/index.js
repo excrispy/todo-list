@@ -18,6 +18,18 @@ class App extends Component {
     selectedList: placeHolderListItem,
   };
 
+  getTemplate = () => {
+    return this.state.listDialogIsOpen ? 
+      (<Template
+        isOpen={ this.state.listDialogIsOpen }
+        onClose={ this.handleClose }
+        handleSaveList={ this.handleSaveList }
+        handleCloseList={ this.handleCloseList }
+      >
+      </Template>)
+      : null;
+  }
+
   handleChangeSelectedList = (e) => {
     const selectedList = e.target.value;
     this.setState({ selectedList });
@@ -79,13 +91,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Template
-          isOpen={ this.state.listDialogIsOpen }
-          onClose={ this.handleClose }
-          handleSaveList={ this.handleSaveList }
-          handleCloseList={ this.handleCloseList }
-        >
-        </Template>
+        { this.getTemplate() }
         <AppBar position="fixed">
           <Toolbar disableGutters={ this.state.drawerIsOpen }>
             <IconButton

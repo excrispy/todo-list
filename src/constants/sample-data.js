@@ -7,4 +7,3 @@ export const sampleData = [
     { id: 2, taskName: 'Sleep', isComplete: false },
   ]},
 ];
-export const templateTaskRow = [{ id: 0, taskName: '', isCompleted: false }];

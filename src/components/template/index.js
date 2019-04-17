@@ -10,12 +10,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { templateTaskRow } from '../../constants/sample-data';
 
 class Template extends Component {
   state = {
     listName: '',
-    taskRows: templateTaskRow,
+    taskRows: [{ id: 0, taskName: '', isCompleted: false }],
     snackbarIsOpen: false,
   };
 
@@ -32,13 +31,6 @@ class Template extends Component {
           </div>
         </FormControl>
       </div>
-    });
-  }
-
-  clearListTemplate = () => {
-    this.setState({
-      listName: '',
-      taskRows: templateTaskRow,
     });
   }
 
@@ -82,11 +74,6 @@ class Template extends Component {
     this.setState({ taskRows: clonedTasks });
   }
 
-  handleCloseList = () => {
-    this.props.handleCloseList();
-    this.clearListTemplate();
-  }
-
   handleSaveList = () => {
     if (!this.state.listName) {
       this.setState({ snackbarIsOpen: true });
@@ -94,7 +81,6 @@ class Template extends Component {
     }
 
     this.props.handleSaveList(this.state);
-    this.clearListTemplate();
   }
 
   handleCloseSnackbar = () => {
@@ -117,7 +103,7 @@ class Template extends Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={ this.handleAddTask }>Add Task</Button>
-          <Button onClick={ this.handleCloseList }>Cancel</Button>
+          <Button onClick={ handleCloseList }>Cancel</Button>
           <Button onClick={ this.handleSaveList }>Save</Button>
         </DialogActions>
         <Snackbar

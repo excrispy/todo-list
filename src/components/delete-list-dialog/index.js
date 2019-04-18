@@ -1,4 +1,4 @@
-import React, { Component } from '../../../node_modules/react';
+import React, { Component } from 'react';
 import './index.css';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';

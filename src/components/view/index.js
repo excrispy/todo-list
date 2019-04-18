@@ -15,12 +15,16 @@ class View extends Component {
 
     return selectedList.id !== -1 ?
       (<div className="edit">
-        <i className="material-icons" onClick={ this.openAddTask }>
-          playlist_add
-        </i>
-        <i className="material-icons" onClick={ this.openDeleteListDialog }>
-          delete_forever
-        </i>
+        <div className="icon-wrapper">
+          <i className="material-icons" onClick={ this.openAddTask }>
+            playlist_add
+          </i>
+        </div>
+        <div className="icon-wrapper">
+          <i className="material-icons" onClick={ this.openDeleteListDialog }>
+            delete_forever
+          </i>
+        </div>
       </div>)
       : null;
   }

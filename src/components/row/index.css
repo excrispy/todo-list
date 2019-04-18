@@ -2,3 +2,13 @@
     opacity: 0.4;
     text-decoration: line-through;
 }
+
+.task {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-wrapper {
+    align-self: center;
+    cursor: pointer;
+}

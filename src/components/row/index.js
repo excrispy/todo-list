@@ -16,12 +16,17 @@ class Row extends Component {
     const { rowDatum } = this.props;
 
     return (
-      <div className={ rowDatum.isComplete ? "disabled" : "row" } onClick={ this.handleCheckTask }>
-        <FormControlLabel
-          control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
-          label={ rowDatum.taskName }
-        >
-        </FormControlLabel>
+      <div className="task">
+        <div className={ rowDatum.isComplete ? "disabled" : "row" } onClick={ this.handleCheckTask }>
+          <FormControlLabel
+            control={ <Checkbox checked={ rowDatum.isComplete }></Checkbox> }
+            label={ rowDatum.taskName }
+            >
+          </FormControlLabel>
+        </div>
+        <div className="icon-wrapper">
+          <i className="material-icons">delete_forever</i>
+        </div>
       </div>
     );
   }

@@ -33,7 +33,6 @@ class AddTaskDialog extends Component {
       addTaskDialogIsOpen,
       selectedList,
       handleCloseAddTaskDialog,
-      handleAddTask,
     } = this.props;
     const { taskName } = this.state;
 

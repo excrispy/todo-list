@@ -2,25 +2,30 @@ import React, { Component } from '../../../node_modules/react';
 import './index.css';
 import List from '../list/index';
 import EditListDialog from '../../components/edit-list-dialog';
+import AddTaskDialog from '../../components/add-task-dialog';
 
 class View extends Component {
   state = {
     deleteDialogIsOpen: false,
+    addTaskDialogIsOpen: false,
   };
 
-  getEditButton() {
+  getEditButtons() {
     const { selectedList } = this.props;
 
     return selectedList.id !== -1 ?
-      (<div className="delete">
-        <i className="material-icons" onClick={ this.openEditListDialog }>
-          edit
+      (<div className="edit">
+        <i className="material-icons" onClick={ this.openAddTask }>
+          playlist_add
+        </i>
+        <i className="material-icons" onClick={ this.openDeleteListDialog }>
+          delete_forever
         </i>
       </div>)
       : null;
   }
 
-  openEditListDialog = () => {
+  openDeleteListDialog = () => {
     this.setState({ deleteDialogIsOpen: true });
   }
 
@@ -33,21 +38,45 @@ class View extends Component {
     this.props.handleDeleteList(listName);
   }
 
+  openAddTask = () => {
+    this.setState({ addTaskDialogIsOpen: true });
+  }
+
+  handleCloseAddTaskDialog = () => {
+    this.setState({ addTaskDialogIsOpen: false });
+  }
+
+  handleAddTask = (listName, taskName) => {
+    this.props.handleAddTask(listName, taskName);
+    this.handleCloseAddTaskDialog();
+  }
+
   render() {
     const { selectedList, handleCheckTask } = this.props;
-    const { deleteDialogIsOpen } = this.state;
+    const { deleteDialogIsOpen, addTaskDialogIsOpen } = this.state;
 
     return (
       <div className="view">
         <EditListDialog
           deleteDialogIsOpen={ deleteDialogIsOpen }
-          handleCloseEditDialog={ this.handleCloseEditDialog }
           selectedList={ selectedList }
+          handleCloseEditDialog={ this.handleCloseEditDialog }
           handleDeleteList={ this.handleDeleteList }
         >
         </EditListDialog>
-        <List list={ selectedList } handleCheckTask={ handleCheckTask }></List>
-        { this.getEditButton() }
+        <AddTaskDialog
+          addTaskDialogIsOpen={ addTaskDialogIsOpen }
+          selectedList={ selectedList }
+          handleCloseAddTaskDialog={ this.handleCloseAddTaskDialog }
+          handleAddTask={ this.handleAddTask }
+        >
+        </AddTaskDialog>
+        <List
+          list={ selectedList }
+          handleCheckTask={ handleCheckTask }
+        >
+        </List>
+        { this.getEditButtons() }
       </div>
     );
   }

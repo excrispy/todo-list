@@ -17,6 +17,12 @@ class List extends Component {
     ));
   }
 
+  getAddTaskIcon() {
+    return this.props.showEditView
+      ? <i class="material-icons">playlist_add</i>
+      : null;
+  }
+
   render() {
     return (
       <div className="list">

@@ -84,6 +84,14 @@ class App extends Component {
     this.setState({ drawerIsOpen: false });
   }
 
+  handleAddTask = (listName, taskName) => {
+    const clonedLists = [...this.state.lists];
+    const changedList = clonedLists.find(d => d.listName === listName);
+    changedList.taskRows.push({ id: changedList.taskRows.length, taskName, isComplete: false });
+
+    this.setState({ lists: clonedLists });
+  }
+
   render() {
     return (
       <div className="app">
@@ -115,6 +123,7 @@ class App extends Component {
           selectedList={ this.state.selectedList }
           handleCheckTask={ this.handleCheckTask }
           handleDeleteList={ this.handleDeleteList }
+          handleAddTask={ this.handleAddTask }
         >
         </View>
       </div>

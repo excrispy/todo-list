@@ -7,20 +7,20 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-class EditListDialog extends Component {
+class DeleteListDialog extends Component {
   render() {
     const {
       deleteDialogIsOpen,
       selectedList,
-      handleCloseEditDialog,
+      handleCloseDeleteDialog,
       handleDeleteList,
     } = this.props;
 
     return (
-      <div className="edit-list-dialog">
+      <div className="delete-list-dialog">
         <Dialog
           open={ deleteDialogIsOpen }
-          onClose={ handleCloseEditDialog }
+          onClose={ handleCloseDeleteDialog }
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           >
@@ -29,7 +29,7 @@ class EditListDialog extends Component {
               <DialogContentText>This action cannot be undone!</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={ handleCloseEditDialog } color="primary">
+              <Button onClick={ handleCloseDeleteDialog } color="primary">
                 Cancel
               </Button>
               <Button onClick={ () => handleDeleteList(selectedList.listName) } color="primary" autoFocus>
@@ -42,4 +42,4 @@ class EditListDialog extends Component {
   }
 }
 
-export default EditListDialog;
+export default DeleteListDialog;

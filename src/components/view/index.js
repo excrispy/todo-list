@@ -1,7 +1,7 @@
 import React, { Component } from '../../../node_modules/react';
 import './index.css';
 import List from '../list/index';
-import EditListDialog from '../../components/edit-list-dialog';
+import DeleteListDialog from '../../components/delete-list-dialog';
 import AddTaskDialog from '../../components/add-task-dialog';
 
 class View extends Component {
@@ -29,12 +29,12 @@ class View extends Component {
     this.setState({ deleteDialogIsOpen: true });
   }
 
-  handleCloseEditDialog = () => {
+  handleCloseDeleteDialog = () => {
     this.setState({ deleteDialogIsOpen: false });
   }
 
   handleDeleteList = (listName) => {
-    this.handleCloseEditDialog();
+    this.handleCloseDeleteDialog();
     this.props.handleDeleteList(listName);
   }
 
@@ -57,13 +57,13 @@ class View extends Component {
 
     return (
       <div className="view">
-        <EditListDialog
+        <DeleteListDialog
           deleteDialogIsOpen={ deleteDialogIsOpen }
           selectedList={ selectedList }
-          handleCloseEditDialog={ this.handleCloseEditDialog }
+          handleCloseDeleteDialog={ this.handleCloseDeleteDialog }
           handleDeleteList={ this.handleDeleteList }
         >
-        </EditListDialog>
+        </DeleteListDialog>
         <AddTaskDialog
           addTaskDialogIsOpen={ addTaskDialogIsOpen }
           selectedList={ selectedList }

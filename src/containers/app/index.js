@@ -92,6 +92,20 @@ class App extends Component {
     this.setState({ lists: clonedLists });
   }
 
+  handleDeleteTask = (taskName, listName) => {
+    const clonedLists = [...this.state.lists];
+    const changedList = clonedLists.find(d => d.listName === listName);
+    let changedIndex;
+    changedList.taskRows.forEach((d,i) => {
+      if (d.taskName === taskName) {
+        changedIndex = i;
+      }
+    });
+    changedList.taskRows.splice(changedIndex, 1);
+
+    this.setState({ lists: clonedLists });
+  }
+
   render() {
     return (
       <div className="app">
@@ -124,6 +138,7 @@ class App extends Component {
           handleCheckTask={ this.handleCheckTask }
           handleDeleteList={ this.handleDeleteList }
           handleAddTask={ this.handleAddTask }
+          handleDeleteTask={ this.handleDeleteTask }
         >
         </View>
       </div>

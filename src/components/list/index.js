@@ -4,14 +4,15 @@ import Row from '../row/index';
 
 class List extends Component {
   getRows() {
-    const { list, handleCheckTask } = this.props;
+    const { list, handleCheckTask, handleDeleteTask } = this.props;
 
     return list.taskRows.map((row, i) => (
       <Row
         key={ i }
         rowDatum={ row }
-        label={ list.listName }
+        listName={ list.listName }
         handleCheckTask={ handleCheckTask }
+        handleDeleteTask={ handleDeleteTask }
       >
       </Row>
     ));

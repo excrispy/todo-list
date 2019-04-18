@@ -5,15 +5,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 class Row extends Component {
   handleCheckTask = () => {
-    const { rowDatum, label } = this.props;
+    const { rowDatum, listName } = this.props;
     const checkedStatus = !rowDatum.isComplete;
     const newRowDatum = { taskName: rowDatum.taskName, isComplete: checkedStatus };
 
-    this.props.handleCheckTask(newRowDatum, label);
+    this.props.handleCheckTask(newRowDatum, listName);
   }
 
   render() {
-    const { rowDatum } = this.props;
+    const { rowDatum, listName, handleDeleteTask } = this.props;
 
     return (
       <div className="task">
@@ -24,7 +24,7 @@ class Row extends Component {
             >
           </FormControlLabel>
         </div>
-        <div className="icon-wrapper">
+        <div className="icon-wrapper" onClick={ () => handleDeleteTask(rowDatum.taskName, listName) }>
           <i className="material-icons">delete_forever</i>
         </div>
       </div>

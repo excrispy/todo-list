@@ -56,7 +56,7 @@ class View extends Component {
   }
 
   render() {
-    const { selectedList, handleCheckTask } = this.props;
+    const { selectedList, handleCheckTask, handleDeleteTask } = this.props;
     const { deleteDialogIsOpen, addTaskDialogIsOpen } = this.state;
 
     return (
@@ -78,6 +78,7 @@ class View extends Component {
         <List
           list={ selectedList }
           handleCheckTask={ handleCheckTask }
+          handleDeleteTask={ handleDeleteTask }
         >
         </List>
         { this.getEditButtons() }

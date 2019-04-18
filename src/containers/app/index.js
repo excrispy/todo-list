@@ -3,7 +3,6 @@ import SidePanel from '../../components/side-panel/index';
 import View from '../../components/view/index';
 import './index.css';
 import ListTemplateDialog from '../../components/list-template-dialog';
-import EditListDialog from '../../components/edit-list-dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +14,6 @@ class App extends Component {
   state = {
     drawerIsOpen: false,
     listDialogIsOpen: false,
-    deleteDialogIsOpen: false,
     lists: sampleData,
     selectedList: placeHolderListItem,
   };
@@ -27,20 +25,8 @@ class App extends Component {
         onClose={ this.handleClose }
         handleSaveList={ this.handleSaveList }
         handleCloseListDialog={ this.handleCloseListDialog }
-        handleDeleteList={ this.handleDeleteList }
       >
       </ListTemplateDialog>)
-      : null;
-  }
-
-  getDeleteListDialog = () => {
-    return this.state.deleteDialogIsOpen
-      ? (<EditListDialog
-        deleteDialogIsOpen={ this.state.deleteDialogIsOpen }
-        handleCloseDeleteDialog={ this.handleCloseDeleteDialog }
-        selectedList={ this.state.selectedList }
-      >
-      </EditListDialog>)
       : null;
   }
 
@@ -87,11 +73,7 @@ class App extends Component {
       }
     });
 
-    this.setState({ deleteDialogIsOpen: false, lists: newList, selectedList: newList[0] });
-  }
-
-  handleCloseDeleteDialog = () => {
-    this.setState({ deleteDialogIsOpen: false });
+    this.setState({ lists: newList, selectedList: newList[0] });
   }
 
   handleOpenDrawer = () => {
@@ -102,15 +84,10 @@ class App extends Component {
     this.setState({ drawerIsOpen: false });
   }
 
-  handleDeleteTask = () => {
-    this.setState({ deleteDialogIsOpen: true });
-  }
-
   render() {
     return (
       <div className="app">
         { this.getListTemplateDialog() }
-        { this.getDeleteListDialog() }
         <AppBar position="fixed">
           <Toolbar disableGutters={ this.state.drawerIsOpen }>
             <IconButton
@@ -137,7 +114,7 @@ class App extends Component {
         <View
           selectedList={ this.state.selectedList }
           handleCheckTask={ this.handleCheckTask }
-          handleDeleteTask={ this.handleDeleteTask }
+          handleDeleteList={ this.handleDeleteList }
         >
         </View>
       </div>

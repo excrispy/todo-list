@@ -29,7 +29,7 @@ class EditListDialog extends Component {
               <DialogContentText>This action cannot be undone!</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={ this.handleCloseDeleteDialog } color="primary">
+              <Button onClick={ handleCloseDeleteDialog } color="primary">
                 Cancel
               </Button>
               <Button onClick={ () => handleDeleteList(selectedList.listName) } color="primary" autoFocus>

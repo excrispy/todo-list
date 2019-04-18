@@ -61,6 +61,12 @@ class View extends Component {
 
     return (
       <div className="view">
+        <List
+          list={ selectedList }
+          handleCheckTask={ handleCheckTask }
+          handleDeleteTask={ handleDeleteTask }
+        >
+        </List>
         <DeleteListDialog
           deleteDialogIsOpen={ deleteDialogIsOpen }
           selectedList={ selectedList }
@@ -75,12 +81,6 @@ class View extends Component {
           handleAddTask={ this.handleAddTask }
         >
         </AddTaskDialog>
-        <List
-          list={ selectedList }
-          handleCheckTask={ handleCheckTask }
-          handleDeleteTask={ handleDeleteTask }
-        >
-        </List>
         { this.getEditButtons() }
       </div>
     );

@@ -12,7 +12,7 @@ class EditListDialog extends Component {
     const {
       deleteDialogIsOpen,
       selectedList,
-      handleCloseDeleteDialog,
+      handleCloseEditDialog,
       handleDeleteList,
     } = this.props;
 
@@ -20,7 +20,7 @@ class EditListDialog extends Component {
       <div className="edit-list-dialog">
         <Dialog
           open={ deleteDialogIsOpen }
-          onClose={ handleCloseDeleteDialog }
+          onClose={ handleCloseEditDialog }
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           >
@@ -29,7 +29,7 @@ class EditListDialog extends Component {
               <DialogContentText>This action cannot be undone!</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={ handleCloseDeleteDialog } color="primary">
+              <Button onClick={ handleCloseEditDialog } color="primary">
                 Cancel
               </Button>
               <Button onClick={ () => handleDeleteList(selectedList.listName) } color="primary" autoFocus>

@@ -8,13 +8,13 @@ class View extends Component {
     deleteDialogIsOpen: false,
   };
 
-  getDeleteButton() {
+  getEditButton() {
     const { selectedList } = this.props;
 
     return selectedList.id !== -1 ?
       (<div className="delete">
         <i className="material-icons" onClick={ this.openEditListDialog }>
-          delete_forever
+          edit
         </i>
       </div>)
       : null;
@@ -24,30 +24,30 @@ class View extends Component {
     this.setState({ deleteDialogIsOpen: true });
   }
 
-  handleCloseDeleteDialog = () => {
+  handleCloseEditDialog = () => {
     this.setState({ deleteDialogIsOpen: false });
   }
 
   handleDeleteList = (listName) => {
-    this.handleCloseDeleteDialog();
+    this.handleCloseEditDialog();
     this.props.handleDeleteList(listName);
   }
 
   render() {
-    const { selectedList, handleCheckTask, handleDeleteList } = this.props;
+    const { selectedList, handleCheckTask } = this.props;
     const { deleteDialogIsOpen } = this.state;
 
     return (
       <div className="view">
         <EditListDialog
           deleteDialogIsOpen={ deleteDialogIsOpen }
-          handleCloseDeleteDialog={ this.handleCloseDeleteDialog }
+          handleCloseEditDialog={ this.handleCloseEditDialog }
           selectedList={ selectedList }
           handleDeleteList={ this.handleDeleteList }
         >
         </EditListDialog>
         <List list={ selectedList } handleCheckTask={ handleCheckTask }></List>
-        { this.getDeleteButton() }
+        { this.getEditButton() }
       </div>
     );
   }
